@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    platform: mariadb
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/drhealth
+    username: drhealth
+    password: drhealth
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jpa:
+    ddl-auto: update
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
