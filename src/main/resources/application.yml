@@ -1,14 +1,20 @@
 spring:
   datasource:
-    platform: mariadb
     driverClassName: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/drhealth
+    url: jdbc:mariadb://localhost:3306/drhealth?useTimezone=true&serverTimezone=UTC
     username: drhealth
     password: drhealth
     testWhileIdle: true
     validationQuery: SELECT 1
   jpa:
-    ddl-auto: update
+    ddl-auto: none
     hibernate:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB103Dialect
+        show_sql: true
+  sql:
+    init:
+      platform: mariadb
