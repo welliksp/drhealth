@@ -11,7 +11,7 @@ public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String street;
     private Long number;
     private String state;
@@ -22,7 +22,7 @@ public class Address implements Serializable {
     @Column(name = "created_at")
     private Timestamp created_ate;
 
-    public Address(Integer id, String street, Long number, String state, String city, String zipcode, String complement, Timestamp created_ate) {
+    public Address(Long id, String street, Long number, String state, String city, String zipcode, String complement, Timestamp created_ate) {
         this.id = id;
         this.street = street;
         this.number = number;
@@ -37,11 +37,11 @@ public class Address implements Serializable {
 
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,6 +1,6 @@
 create table address
 (
-    id  integer not null auto_increment,
+    id  int not null auto_increment,
     street     varchar(50) not null,
     number     long        not null,
     state      varchar(20) not null,

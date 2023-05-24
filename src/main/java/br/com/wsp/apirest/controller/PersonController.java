@@ -1,44 +1,58 @@
 package br.com.wsp.apirest.controller;
 
-import br.com.wsp.apirest.model.record.PersonRecord;
+import br.com.wsp.apirest.vo.v1.PersonVO;
 import br.com.wsp.apirest.service.PersonService;
+import br.com.wsp.apirest.util.MediaType;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
 @RequestMapping(value = "/person")
 public class PersonController {
-
     @Autowired
     private PersonService personService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PersonRecord> findPersonById(@RequestParam Integer id) {
+    @GetMapping(value = "/{id}",
+            produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
+    public ResponseEntity<PersonVO> findPersonById(@PathVariable(value = "id") Integer id) {
 
-        PersonRecord byId = personService.findById(id);
+        PersonVO byId = personService.findById(id);
 
         return ResponseEntity.ok(byId);
     }
+    @GetMapping(
+            produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
+    public ResponseEntity<List<PersonVO>> findAll() {
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PersonRecord> save(@RequestBody @Valid PersonRecord personRecord) {
+        List<PersonVO> all = personService.findAll();
 
-        PersonRecord save = personService.save(personRecord);
+        return ResponseEntity.ok(all);
+    }
+
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
+            produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
+    public ResponseEntity<PersonVO> save(@RequestBody @Valid PersonVO personVO) {
+
+        PersonVO save = personService.save(personVO);
 
         return ResponseEntity.ok(save);
     }
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PersonRecord> update(@RequestBody @Valid PersonRecord personRecord) {
 
-        PersonRecord save = personService.update(personRecord);
+    @PutMapping(consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
+            produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
+    public ResponseEntity<PersonVO> update(@RequestBody @Valid PersonVO personVO) {
+
+        PersonVO save = personService.update(personVO);
 
         return ResponseEntity.ok(save);
     }
-    @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+
+    @DeleteMapping()
     public ResponseEntity<?> delete(@RequestParam Integer id) {
 
         personService.delete(id);
