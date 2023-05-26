@@ -2,78 +2,60 @@ package br.com.wsp.apirest.service;
 
 import br.com.wsp.apirest.exception.ResourceNotFoundException;
 import br.com.wsp.apirest.model.Person;
+import br.com.wsp.apirest.model.record.v1.PersonRecord;
 import br.com.wsp.apirest.repository.PersonRepository;
-import br.com.wsp.apirest.vo.v1.PersonVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 @Service
 public class PersonService {
-    private Logger logger = Logger.getLogger(PersonService.class.getName());
+    private final Logger logger = Logger.getLogger(PersonService.class.getName());
 
-    @Autowired
-    private PersonRepository personRepository;
+    private final PersonRepository personRepository;
 
-    public List<PersonVO> findAll() {
-
-        logger.info("find person by id");
-        List<Person> personList = personRepository.findAll();
-
-        List<PersonVO> personVO = new ArrayList<>();
-        personList.forEach(p -> {
-            PersonVO personVO1 = new PersonVO(p);
-            personVO.add(personVO1);
-        });
-
-        return personVO;
+    public PersonService(PersonRepository personRepository) {
+        this.personRepository = personRepository;
     }
 
-    public PersonVO findById(Integer personId) {
+    public Person findById(Integer personId) {
 
         logger.info("find person by id");
-        Person person = personRepository.findById(personId).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
-
-        PersonVO personVO = new PersonVO(person);
-
-        return personVO;
+        return personRepository.findById(personId).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
-    public PersonVO save(PersonVO personVO) {
+    public Person save(PersonRecord personRecord) {
 
-        Person person = new Person(personVO);
+        Person person = new Person(personRecord);
 
         logger.info("save person");
-        Person save = personRepository.save(person);
-
-        PersonVO converted = new PersonVO(save);
-        return converted;
+        return personRepository.save(person);
 
     }
 
-    public PersonVO update(PersonVO personVO) {
+    public Person update(PersonRecord personRecord) {
 
         logger.info("Finding one person!");
-        var person = personRepository.findById(personVO.getKey()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        var person = personRepository.findById(personRecord.id()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
-        person.setFirstname(personVO.getFirstname());
-        person.setLastname(personVO.getLastname());
-        person.setBirthdate(personVO.getBirthdate());
-        person.setEmail(personVO.getEmail());
-        person.setGender(personVO.getGender());
+        person.setFirstname(personRecord.firstname());
+        person.setLastname(personRecord.lastname());
+        person.setBirthdate(personRecord.birthdate());
+        person.setEmail(personRecord.email());
+        person.setGender(personRecord.gender());
 
         logger.info("Updating one person!");
-        Person save = personRepository.save(person);
-        PersonVO update = new PersonVO(save);
-
-        return update;
+        return personRepository.save(person);
     }
 
     public void delete(Integer id) {
         Person person = personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
         personRepository.deleteById(person.getId());
+    }
+
+    public List<Person> findAll() {
+        return personRepository.findAll();
     }
 }

@@ -18,3 +18,7 @@ spring:
   sql:
     init:
       platform: mariadb
+springdoc:
+  paths-to-match: /person/**/v1
+  swagger-ui:
+    use-root-path: true

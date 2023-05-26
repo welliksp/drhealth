@@ -1,6 +1,7 @@
 package br.com.wsp.apirest.model;
 
-import br.com.wsp.apirest.vo.v1.PersonVO;
+import br.com.wsp.apirest.model.enums.Gender;
+import br.com.wsp.apirest.model.record.v1.PersonRecord;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -25,7 +26,8 @@ public class Person implements Serializable {
     @NotNull
     @Email
     private String email;
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     private String birthdate;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
@@ -34,12 +36,12 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(PersonVO personVO) {
-        this.firstname = personVO.getFirstname();
-        this.lastname = personVO.getLastname();
-        this.birthdate = personVO.getBirthdate();
-        this.email = personVO.getEmail();
-        this.gender = personVO.getGender();
+    public Person(PersonRecord record) {
+        this.firstname = record.firstname();
+        this.lastname = record.lastname();
+        this.birthdate = record.birthdate();
+        this.email = record.email();
+        this.gender = record.gender();
         this.created_at = Timestamp.valueOf(LocalDateTime.now());
     }
 
@@ -75,11 +77,11 @@ public class Person implements Serializable {
         this.email = email;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
