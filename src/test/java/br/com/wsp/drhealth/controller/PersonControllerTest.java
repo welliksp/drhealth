@@ -1,6 +1,6 @@
 //package br.com.wsp.apirest.controller;
 //
-//import br.com.wsp.apirest.repository.PersonRepository;
+//import br.com.wsp.apirest.repository.PatientRepository;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.api.TestInstance;
@@ -15,9 +15,9 @@
 //public class PersonControllerTest {
 //
 //    @Mock
-//    private PersonRepository personRepository;
+//    private PatientRepository personRepository;
 //    @InjectMocks
-//    private PersonController personController;
+//    private PatientController personController;
 //
 //    @BeforeEach
 //    void setUpMocks() throws Exception {

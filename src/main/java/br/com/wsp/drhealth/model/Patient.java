@@ -1,7 +1,7 @@
 package br.com.wsp.drhealth.model;
 
 import br.com.wsp.drhealth.model.enums.Gender;
-import br.com.wsp.drhealth.model.record.v1.UserRecord;
+import br.com.wsp.drhealth.model.record.PatientRecord;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -11,8 +11,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user")
-public class User implements Serializable {
+@Table(name = "patient")
+public class Patient implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,18 +31,18 @@ public class User implements Serializable {
     private String birthdate;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
-    private Timestamp created_at;
+    private Timestamp createAt;
 
-    public User() {
+    public Patient() {
     }
 
-    public User(UserRecord record) {
+    public Patient(PatientRecord record) {
         this.firstname = record.firstname();
         this.lastname = record.lastname();
         this.birthdate = record.birthdate();
         this.email = record.email();
         this.gender = record.gender();
-        this.created_at = Timestamp.valueOf(LocalDateTime.now());
+        this.createAt = Timestamp.valueOf(LocalDateTime.now());
     }
 
     public Integer getId() {
@@ -93,11 +93,11 @@ public class User implements Serializable {
         this.birthdate = birthdate;
     }
 
-    public Timestamp getCreated_at() {
-        return created_at;
+    public Timestamp getCreatedAt() {
+        return createAt;
     }
 
-    public void setCreated_at(Timestamp created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Timestamp created_at) {
+        this.createAt = created_at;
     }
 }
