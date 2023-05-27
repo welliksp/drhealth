@@ -1,7 +1,7 @@
-package br.com.wsp.apirest.model;
+package br.com.wsp.drhealth.model;
 
-import br.com.wsp.apirest.model.enums.Gender;
-import br.com.wsp.apirest.model.record.v1.PersonRecord;
+import br.com.wsp.drhealth.model.enums.Gender;
+import br.com.wsp.drhealth.model.record.v1.UserRecord;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -11,8 +11,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "person")
-public class Person implements Serializable {
+@Table(name = "user")
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,10 +33,10 @@ public class Person implements Serializable {
     @Column(name = "created_at")
     private Timestamp created_at;
 
-    public Person() {
+    public User() {
     }
 
-    public Person(PersonRecord record) {
+    public User(UserRecord record) {
         this.firstname = record.firstname();
         this.lastname = record.lastname();
         this.birthdate = record.birthdate();

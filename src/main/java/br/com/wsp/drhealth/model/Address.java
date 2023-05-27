@@ -1,4 +1,4 @@
-package br.com.wsp.apirest.model;
+package br.com.wsp.drhealth.model;
 
 import jakarta.persistence.*;
 

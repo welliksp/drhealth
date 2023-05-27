@@ -1,4 +1,4 @@
-package br.com.wsp.apirest.util;
+package br.com.wsp.drhealth.util;
 
 public class MediaType {
     public static final String APPLICATION_JSON = "application/json";

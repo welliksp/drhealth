@@ -1,4 +1,4 @@
-package br.com.wsp.apirest.exception;
+package br.com.wsp.drhealth.exception;
 
 import java.io.Serializable;
 import java.util.Date;

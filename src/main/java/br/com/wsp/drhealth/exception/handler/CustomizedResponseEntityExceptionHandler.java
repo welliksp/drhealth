@@ -1,7 +1,7 @@
-package br.com.wsp.apirest.exception.handler;
+package br.com.wsp.drhealth.exception.handler;
 
-import br.com.wsp.apirest.exception.ExceptionResponse;
-import br.com.wsp.apirest.exception.ResourceNotFoundException;
+import br.com.wsp.drhealth.exception.ExceptionResponse;
+import br.com.wsp.drhealth.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
